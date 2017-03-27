@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using SeeSharp7.Patch4Net.Models;
 
 namespace SeeSharp7.Patch4Net
 {
-    public static class JsonMergePatch
+    public static class JsonPatcher
     {
         /// <summary>
         /// Performs a merge patch and returns a modified clone of the <param name="originalModel"></param>
@@ -20,7 +21,6 @@ namespace SeeSharp7.Patch4Net
                 throw new ArgumentNullException(nameof(originalModel));
 
             var deepCopy = originalModel.CloneJson();
-
             var mergePatch = JObject.Parse(mergePatchRequestBody);
 
             //Extract properties of model
@@ -35,13 +35,18 @@ namespace SeeSharp7.Patch4Net
                 if (value == null &&
                     Nullable.GetUnderlyingType(property.PropertyType) == null) //type not nullable
                 {
-                    continue;
+                    throw new ArgumentNullException(property.Name);
                 }
 
                 property.SetValue(deepCopy, value);
             }
 
             return deepCopy;
+        }
+
+        public static TModel Patch<TModel>(JsonPatchModel jsonPatchModel, TModel originalModel)
+        {
+            return default(TModel);
         }
 
         private static object GetConvertedValue(KeyValuePair<string, JToken> node)

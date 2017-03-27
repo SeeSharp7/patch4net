@@ -9,8 +9,6 @@ namespace SeeSharp7.Patch4Net.Reflection
     {
         internal static Type BuildMergePatchTypeOfModel()
         {
-
-
             return typeof(TModel);
         }
 

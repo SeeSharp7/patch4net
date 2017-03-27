@@ -45,10 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeepCopy.cs" />
-    <Compile Include="JsonMergePatch.cs" />
-    <Compile Include="JsonPatch.cs" />
+    <Compile Include="JsonPatcher.cs" />
     <Compile Include="JsonPatchModifiers.cs" />
+    <Compile Include="Models\JsonPatchModel.cs" />
+    <Compile Include="Models\JsonPatchOperation.cs" />
+    <Compile Include="ModelWalker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyCrawler.cs" />
     <Compile Include="Reflection\TypeBuilderFactory.cs" />
   </ItemGroup>
   <ItemGroup>

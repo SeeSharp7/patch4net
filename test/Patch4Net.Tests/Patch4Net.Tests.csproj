@@ -54,6 +54,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mocks\ComplexModel.cs" />
+    <Compile Include="Mocks\ComplexModelDictionarySub.cs" />
+    <Compile Include="Mocks\ComplexModelSub1.cs" />
+    <Compile Include="Mocks\ComplexModelSub2.cs" />
     <Compile Include="Mocks\SimpleModel.cs" />
     <Compile Include="JsonMergePatchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
