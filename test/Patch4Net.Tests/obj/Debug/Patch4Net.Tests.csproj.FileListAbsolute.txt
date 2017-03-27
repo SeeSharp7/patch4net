@@ -1,0 +1,12 @@
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Patch4Net.Tests.dll
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Patch4Net.Tests.pdb
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Newtonsoft.Json.dll
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Patch4Net.dll
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Patch4Net.pdb
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Newtonsoft.Json.xml
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\bin\Debug\de\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\obj\Debug\Patch4Net.Tests.csprojResolveAssemblyReference.cache
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\obj\Debug\Patch4Net.Tests.dll
+C:\Work\Playground\patch4net\test\Patch4Net.Tests\obj\Debug\Patch4Net.Tests.pdb
