@@ -11,4 +11,3 @@ C:\Work\GitHub\SeeSharp7\patch4net\src\bin\Debug\Newtonsoft.Json.dll
 C:\Work\GitHub\SeeSharp7\patch4net\src\bin\Debug\Newtonsoft.Json.xml
 C:\Work\GitHub\SeeSharp7\patch4net\src\obj\Debug\Patch4Net.dll
 C:\Work\GitHub\SeeSharp7\patch4net\src\obj\Debug\Patch4Net.pdb
-C:\Work\GitHub\SeeSharp7\patch4net\src\obj\Debug\Patch4Net.csprojResolveAssemblyReference.cache

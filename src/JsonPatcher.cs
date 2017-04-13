@@ -48,12 +48,13 @@ namespace SeeSharp7.Patch4Net
             {
                 return Patch(requestBody, originalModel);
             }
+
             if (string.Compare(contentTypeHeaderValue, ContentTypeMergePatch, StringComparison.InvariantCultureIgnoreCase) == 0)
             {
                 return MergePatch(requestBody, originalModel);
             }
 
-            throw new UnknownContentTypeException($"The value {contentTypeHeaderValue} of ContentType Header (specified in parameter {nameof(contentTypeHeaderValue)}) is unknown");
+            throw new UnknownContentTypeException($"Unknown value {contentTypeHeaderValue} of parameter {nameof(contentTypeHeaderValue)}");
         }
 
         /// <summary>
@@ -84,9 +85,10 @@ namespace SeeSharp7.Patch4Net
         public TModel Patch<TModel>(string patchRequestBody, TModel originalModel)
         {
             var jParsedOriginalModel = CloneToJObject(originalModel);
-            var jParsedRequestBody = JObject.Parse(patchRequestBody);
-            
-            //do some cool patch stuff here
+            var jParsedRequestBody = JArray.Parse(patchRequestBody);
+
+            var patch = new JsonPatch.JsonPatch();
+            patch.Patch(jParsedRequestBody, jParsedOriginalModel);
 
             return _serializer.DeserializeObject<TModel>(jParsedOriginalModel.ToString());
         }

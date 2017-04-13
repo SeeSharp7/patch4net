@@ -13,10 +13,25 @@ namespace SeeSharp7.Patch4Net.Tests
             [TestMethod]
             public void ItShouldPatchTheSimpleModelCorrectly()
             {
-                //var incomingContentTypeHeaderValue = "xxx";
-                
-                //var jsonPatcher = new JsonPatcher();
-                //var patchedModel = jsonPatcher.UniversalPatch(requestBody, originalModel, incomingContentTypeHeaderValue);
+                //arrange
+                const int age = 26;
+                const string oldName = "Sarah Mayer";
+                const decimal oldAccountBalance = 30.5m;
+
+                var simpleModel = new SimpleCustomerModel
+                {
+                    Name = oldName,
+                    Age = age,
+                    AccountBalance = oldAccountBalance
+                };
+
+                var patchJson = "[\r\n  { \"op\": \"replace\", \"path\": \"/baz\", \"value\": \"boo\" },\r\n  { \"op\": \"add\", \"path\": \"/hello\", \"value\": [\"world\"] },\r\n  { \"op\": \"remove\", \"path\": \"/foo\"}\r\n]";
+
+                //act
+                var jsonPatcher = new JsonPatcher();
+                var patchedModel = jsonPatcher.Patch(patchJson, simpleModel);
+
+                //assert
             }
         }
 
