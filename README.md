@@ -4,12 +4,6 @@ A free and easy to use .NET library for JSON PATCH (RFC 6902) and JSON MERGE PAT
 ## IMORTANT NOTICE!
 JSON PATCH (RFC 6902) is currently not implemented! If this is a essential feature for you, wait until it's implemented.
 
-## INSTALLATION
-This should be published via the NuGet Package Manager. 
-
-## DEPENDENCIES
-This library depends on Newtonsoft.Json aka Json.Net. The dependency is resolved by a dependent NuGet-Package. No binary references!
-
 ## USAGE
 The usage of this library is very simple. It only consumes the minimum required data. There is no restriction on your original model and it doesn't need to be converted because of generic types. The body of your incoming patch request simply needs to be a string.
 
