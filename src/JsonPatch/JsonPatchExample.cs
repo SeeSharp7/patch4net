@@ -3,7 +3,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SeeSharp7.Patch4Net.Examples
+namespace SeeSharp7.Patch4Net.JsonPatch
 {
     /// <summary>
     /// Got it from here: http://blog.abodit.com/2014/05/json-patch-c-implementation/

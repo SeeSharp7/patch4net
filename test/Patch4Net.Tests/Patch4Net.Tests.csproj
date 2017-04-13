@@ -59,7 +59,7 @@
     <Compile Include="Mocks\ComplexModelSub1.cs" />
     <Compile Include="Mocks\ComplexModelSub2.cs" />
     <Compile Include="Mocks\SimpleModel.cs" />
-    <Compile Include="JsonMergePatchTests.cs" />
+    <Compile Include="JsonPatcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
