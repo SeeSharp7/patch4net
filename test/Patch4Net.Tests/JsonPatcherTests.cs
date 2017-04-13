@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using SeeSharp7.Patch4Net.Tests.Mocks;
 
@@ -14,7 +13,10 @@ namespace SeeSharp7.Patch4Net.Tests
             [TestMethod]
             public void ItShouldPatchTheSimpleModelCorrectly()
             {
-
+                //var incomingContentTypeHeaderValue = "xxx";
+                
+                //var jsonPatcher = new JsonPatcher();
+                //var patchedModel = jsonPatcher.UniversalPatch(requestBody, originalModel, incomingContentTypeHeaderValue);
             }
         }
 
@@ -25,9 +27,9 @@ namespace SeeSharp7.Patch4Net.Tests
             public void ItShouldMergePatchTheSimpleModelCorrectly()
             {
                 //arrange
+                const int age = 26;
                 const string oldName = "Sarah Mayer";
                 const string newName = "Sarah Richgirl";
-                const int age = 26;
                 const decimal oldAccountBalance = 30.5m;
                 const decimal newAccountBalance = 100000000.5m;
 
@@ -50,46 +52,6 @@ namespace SeeSharp7.Patch4Net.Tests
                 Assert.AreEqual(age, patchedModel.Age, "Age has been changed");
                 Assert.AreEqual(newAccountBalance, patchedModel.AccountBalance, "AccountBalance is wrong");
             }
-        }
-
-
-        private ComplexModel GetComplexModelExample()
-        {
-            return new ComplexModel
-            {
-                Id = 1,
-                SubModel1 = new ComplexModelSub1
-                {
-                    Id = 11,
-                    Data = new ComplexModelSub2
-                    {
-                        Name = "ReneSub",
-                        Age = 26
-                    }
-                },
-                SubModel2 = new ComplexModelSub2
-                {
-                    Name = "Rene",
-                    Age = 27
-                },
-                DictionaryWithSubModel = new Dictionary<string, ComplexModelDictionarySub>
-                {
-                    {
-                        "keyUno",
-                        new ComplexModelDictionarySub
-                        {
-                            ExampleText = "This is some Text"
-                        }
-                    },
-                                        {
-                        "keyDuo",
-                        new ComplexModelDictionarySub
-                        {
-                            ExampleText = "This is some duo Text"
-                        }
-                    },
-                }
-            };
         }
     }
 }

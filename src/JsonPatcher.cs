@@ -11,7 +11,6 @@ namespace SeeSharp7.Patch4Net
     public class JsonPatcher
     {
         private readonly ISerializer _serializer;
-
         private const string ContentTypePatch = "application/json-patch+json";
         private const string ContentTypeMergePatch = "application/merge-patch+json";
 

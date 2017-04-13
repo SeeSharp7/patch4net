@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\UnknownContentTypeException.cs" />
     <Compile Include="JsonMergePatch\JsonMergePatch.cs" />
+    <Compile Include="JsonPatch\JsonPatch.cs" />
     <Compile Include="JsonPatch\JsonPatchExample.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="JsonPatcher.cs" />
