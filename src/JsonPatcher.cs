@@ -1,102 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using SeeSharp7.Patch4Net.Models;
+﻿using Newtonsoft.Json.Linq;
+using SeeSharp7.Patch4Net.Serializers;
 
 namespace SeeSharp7.Patch4Net
 {
-    public static class JsonPatcher
+    public class JsonPatcher
     {
+        private readonly ISerializer _serializer;
+
         /// <summary>
-        /// Performs a merge patch and returns a modified clone of the <param name="originalModel"></param>
+        /// Creates a new instance of <see cref="JsonPatcher"/>
+        /// with the default <see cref="NewtonsoftSerializer"/>
+        /// </summary>
+        public JsonPatcher()
+        {
+            _serializer = new NewtonsoftSerializer();
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="JsonPatcher"/>
+        /// with your specified instance of <see cref="ISerializer"/>
+        /// </summary>
+        /// <param name="serializer"></param>
+        public JsonPatcher(ISerializer serializer)
+        {
+            _serializer = serializer;
+        }
+
+        /// <summary>
+        /// Performs a json merge patch (RFC 7386)
         /// </summary>
         /// <typeparam name="TModel">The <see cref="System.Type"/> of your model</typeparam>
         /// <param name="mergePatchRequestBody">The request body containing the merge patch content</param>
         /// <param name="originalModel">The original model to modify</param>
-        /// <returns></returns>
-        public static TModel MergePatch<TModel>(string mergePatchRequestBody, TModel originalModel)
+        /// <returns>Returns a new instance of the <param name="originalModel"></param></returns>
+        public TModel MergePatch<TModel>(string mergePatchRequestBody, TModel originalModel)
         {
-            if (originalModel == null)
-                throw new ArgumentNullException(nameof(originalModel));
+            var jParsedOriginalModel = GetJObjectFromModel(originalModel);
+            
+            //do some cool merge patch stuff here
 
-            var deepCopy = originalModel.CloneJson();
-            var mergePatch = JObject.Parse(mergePatchRequestBody);
-
-            //Extract properties of model
-            var t = typeof(TModel);
-            var properties = t.GetProperties().Where(prop => prop.CanRead && prop.CanWrite).ToList();
-
-            foreach (var node in mergePatch)
-            {
-                var value = GetConvertedValue(node);
-                var property = properties.First(p => string.Equals(p.Name, node.Key, StringComparison.CurrentCultureIgnoreCase));
-
-                if (value == null &&
-                    Nullable.GetUnderlyingType(property.PropertyType) == null) //type not nullable
-                {
-                    throw new ArgumentNullException(property.Name);
-                }
-
-                property.SetValue(deepCopy, value);
-            }
-
-            return deepCopy;
+            return _serializer.DeserializeObject<TModel>(jParsedOriginalModel.ToString());
         }
 
-        public static TModel Patch<TModel>(JsonPatchModel jsonPatchModel, TModel originalModel)
+        /// <summary>
+        /// Performs a json patch (RFC 6902)
+        /// </summary>
+        /// <typeparam name="TModel">The <see cref="System.Type"/> of your model</typeparam>
+        /// <param name="patchRequestBody">The request body containing the merge patch content</param>
+        /// <param name="originalModel">The original model to modify</param>
+        /// <returns>Returns a new instance of the <param name="originalModel"></param></returns>
+        public TModel Patch<TModel>(string patchRequestBody, TModel originalModel)
         {
-            return default(TModel);
+            var jParsedOriginalModel = GetJObjectFromModel(originalModel);
+
+            //do some cool patch stuff here
+
+            return _serializer.DeserializeObject<TModel>(jParsedOriginalModel.ToString());
         }
 
-        private static object GetConvertedValue(KeyValuePair<string, JToken> node)
+        /// <summary>
+        /// Performs a deep cloning of <see cref="TModel"/>
+        /// by serializing and returns a <see cref="JObject"/>
+        /// </summary>
+        /// <typeparam name="TModel">Type of your original model</typeparam>
+        /// <param name="originalModel">Your original model to clone</param>
+        /// <returns><see cref="JObject"/> of serialized <see cref="TModel"/></returns>
+        private JObject GetJObjectFromModel<TModel>(TModel originalModel)
         {
-            object value;
-
-            switch (node.Value.Type)
-            {
-                case JTokenType.String:
-                    value = node.Value.Value<string>();
-                    break;
-                case JTokenType.Boolean:
-                    value = node.Value.Value<bool>();
-                    break;
-                case JTokenType.Date:
-                    value = node.Value.Value<DateTime>();
-                    break;
-                case JTokenType.Float:
-                    value = node.Value.Value<decimal>();
-                    break;
-                case JTokenType.Integer:
-                    value = node.Value.Value<int>();
-                    break;
-                //case JTokenType.Object:
-                //    break;
-                //case JTokenType.Array:
-                //    break;
-                //case JTokenType.Raw:
-                //    break;
-                //case JTokenType.Bytes:
-                //    break;
-                //case JTokenType.Guid:
-                //    break;
-                //case JTokenType.Uri:
-                //    break;
-                //case JTokenType.TimeSpan:
-                //    break;
-                //case JTokenType.None:
-                //case JTokenType.Undefined:
-                //case JTokenType.Constructor:
-                //case JTokenType.Property:
-                //case JTokenType.Comment:
-                //case JTokenType.Null:
-                //    break;
-                default:
-                    value = null;
-                    break;
-            }
-
-            return value;
+            var serializeOriginalModel = _serializer.SerializeObject(originalModel);
+            return JObject.Parse(serializeOriginalModel);
         }
     }
 }

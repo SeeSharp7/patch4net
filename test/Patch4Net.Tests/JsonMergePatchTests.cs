@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SeeSharp7.Patch4Net.Tests.Mocks;
 
 namespace SeeSharp7.Patch4Net.Tests
@@ -13,7 +12,7 @@ namespace SeeSharp7.Patch4Net.Tests
         [TestMethod]
         public void TestJson()
         {
-            var originalModel = new SimpleCustomerModel {Name = "Ralle", AccountBalance = 123001.33m };
+            var originalModel = new SimpleCustomerModel { Name = "Ralle", AccountBalance = 123001.33m };
 
             var patchModel = new SimpleCustomerModel
             {
@@ -24,7 +23,7 @@ namespace SeeSharp7.Patch4Net.Tests
 
             var patchModelString = JsonConvert.SerializeObject(patchModel);
 
-            var modifiedModel = JsonPatcher.MergePatch(patchModelString, originalModel);
+            var modifiedModel = new JsonPatcher().MergePatch(patchModelString, originalModel);
 
             Assert.AreEqual(patchModel.Name, modifiedModel.Name, "Name stimmt nicht überein");
             Assert.AreEqual(patchModel.Age, modifiedModel.Age, "Age stimmt nicht überein");
@@ -89,14 +88,52 @@ namespace SeeSharp7.Patch4Net.Tests
 	                            }
                             }";
 
-            ModelWalker walker = new ModelWalker();
-            var patchResult = walker.PatchThatModel(patchModel, originalComplexModel);
 
             //var modifiedModel = JsonPatcher.MergePatch(patchModelString, originalModel);
 
             //Assert.AreEqual(patchModel.Name, modifiedModel.Name, "Name stimmt nicht überein");
             //Assert.AreEqual(patchModel.Age, modifiedModel.Age, "Age stimmt nicht überein");
             //Assert.AreEqual(patchModel.AccountBalance, modifiedModel.AccountBalance, "AccountBalance stimmt nicht überein");
+        }
+
+
+        private ComplexModel GetComplexModelExample()
+        {
+            return new ComplexModel
+            {
+                Id = 1,
+                SubModel1 = new ComplexModelSub1
+                {
+                    Id = 11,
+                    Data = new ComplexModelSub2
+                    {
+                        Name = "ReneSub",
+                        Age = 26
+                    }
+                },
+                SubModel2 = new ComplexModelSub2
+                {
+                    Name = "Rene",
+                    Age = 27
+                },
+                DictionaryWithSubModel = new Dictionary<string, ComplexModelDictionarySub>
+                {
+                    {
+                        "keyUno",
+                        new ComplexModelDictionarySub
+                        {
+                            ExampleText = "This is some Text"
+                        }
+                    },
+                                        {
+                        "keyDuo",
+                        new ComplexModelDictionarySub
+                        {
+                            ExampleText = "This is some duo Text"
+                        }
+                    },
+                }
+            };
         }
     }
 }
