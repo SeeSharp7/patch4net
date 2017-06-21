@@ -36,7 +36,7 @@ public void Patch([FromBody] string patchRequest, [FromUri] string id)
     //Load your original model
     var myOrignialModel = MyModel.Load(id);
 
-    //Perfom patch
+    //Perform patch
     var patchedModel = new JsonPatcher().UniversalPatch(patchRequest, myOrignialModel, contentTypeValue);
 
     //Overwrite original model
