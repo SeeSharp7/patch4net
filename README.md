@@ -26,6 +26,7 @@ var patchedModel = new JsonPatcher().MergePatch(mergePatchJson, simpleModel);
 
 ### WebAPI Example
 ```csharp
+//PATCH api/values/{id}
 public void Patch([FromBody] string patchRequest, [FromUri] string id)
 {
     var headerValues = Request.Headers.GetValues("ContentType");
