@@ -29,6 +29,7 @@ var patchedModel = new JsonPatcher().MergePatch(mergePatchJson, simpleModel);
 //PATCH api/values/{id}
 public void Patch([FromBody] string patchRequest, [FromUri] string id)
 {
+    //Extract ContentType-Header
     var headerValues = Request.Headers.GetValues("ContentType");
     var contentTypeValue = headerValues.FirstOrDefault();
 
