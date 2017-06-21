@@ -30,5 +30,5 @@ Many projects make use of exotic settings within their serializers. So it's impo
 The Interface provides two simple methods:
 ```csharp
 TModelType DeserializeObject<TModelType>(string serializedObject);
-TModelType DeserializeObject<TModelType>(string serializedObject);
+string SerializeObject<TModelType>(TModelType modelObject);
 ```
