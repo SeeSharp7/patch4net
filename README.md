@@ -24,6 +24,24 @@ var patchedModel = new JsonPatcher().Patch(patchJson, simpleModel);
 var patchedModel = new JsonPatcher().MergePatch(mergePatchJson, simpleModel);
 ```
 
+### WebAPI Example
+```csharp
+public void Patch([FromBody] string patchRequest, [FromUri] string id)
+{
+    var headerValues = Request.Headers.GetValues("ContentType");
+    var contentTypeValue = headerValues.FirstOrDefault();
+
+    //Load your original model
+    var myOrignialModel = MyModel.Load(id);
+
+    //Perfom patch
+    var patchedModel = new JsonPatcher().UniversalPatch(patchRequest, myOrignialModel, contentTypeValue);
+
+    //Persist modified model
+    patchedModel.Save();
+}
+```
+
 ## CUSTOMIZATION
 Many projects make use of exotic settings within their serializers. So it's impossible to write one, that covers all needs. To solve that problem, I decided to create an interface `ISerializer` to implement completely custom serializers with the specific settings.
 
