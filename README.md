@@ -39,8 +39,8 @@ public void Patch([FromBody] string patchRequest, [FromUri] string id)
     //Perfom patch
     var patchedModel = new JsonPatcher().UniversalPatch(patchRequest, myOrignialModel, contentTypeValue);
 
-    //Persist modified model
-    patchedModel.Save();
+    //Overwrite original model
+    patchedModel.Save(id);
 }
 ```
 
